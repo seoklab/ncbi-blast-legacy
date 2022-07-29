@@ -40,29 +40,6 @@ endif
 
 set tar_file = $1
 set cwd = `pwd`
-
-# do we need to extract the tar archive?
-if ( "X$tar_file" != "X" && "$tar_file" != "-") then
-	if (! -r "$tar_file") then
-		echo Unable to find the file "$tar_file"
-		exit 1
-	endif
-
-	if (-d "ncbi") then
-		echo "ncbi directory already exists, please remove or rename it"
-		exit 2
-	endif
-
-	ls -l $tar_file
-	tar xf $tar_file
-else
-	# make sure that ncbi/build directory exists
-	if ( ! -d "ncbi/build" ) then
-		echo 'ncbi/build directory should exist. Did you extract ncbi.tar.Z?'
-		exit 2
-	endif
-endif
-
 set os=`uname -s`
 
 #by default any Unix has Motif installed. In case of Linux do a check later.
@@ -72,235 +49,11 @@ set HAVE_MAC=0
 #we will try to build OpenGL version of vibrant
 set HAVE_OGL=1
 
-switch ($os)
-case SunOS:
-	switch (`uname -r`)
-	case "4.1*":
-		set platform=sun
-		breaksw
-	default:
-		if ( `uname -p` == i386 ) then
-			set platform=solarisintel
-			if ("$?CC" == 1) then
-				if ("$CC" == "gcc") then
-					set platform=solaris-gcc
-				endif
-			endif
-		else
-			set platform=solaris
-			if ("$?CC" == 1) then
-				if ("$CC" == "gcc") then
-					set platform=solaris-gcc
-				endif
-			else if ("$?SOLARIS_MODE" == 1) then
-				if ("$SOLARIS_MODE" == "64") then
-					set platform=solaris64
-				endif
-			endif
-		endif
-		breaksw
-	endsw
-	set HAVE_OGL=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 /usr/openwin/include )
-		if (-d $i/GL) then
-			set HAVE_OGL=1
-			echo OpenGL found at $i/GL
-			break
-		endif
-	end
-	breaksw
-case IRIX*:
-	switch (`uname -r`)
-	case "4.*":
-		set platform=sgi4
-		breaksw
-	case "5.*":
-		set platform=sgi5
-		breaksw
-	case "6.5":
-		#set platform=sgi-mips4
-		set platform=sgi
-		breaksw
-	case "6.[0-4]":
-		set platform=sgi
-		breaksw
-	default:
-		set platform=sgi
-		breaksw
-	endsw
-	breaksw
-case OSF1:
-	set platform=alphaOSF1
-	set HAVE_MOTIF=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 )
-		if (-d $i/Xm) then
-			set HAVE_MOTIF=1
-			echo Motif found at $i/Xm
-			break
-		endif
-	end
-	breaksw
-case Linux:
-case GNU/Linux:
-	lsb_release -a
-    echo "libs version is:"
-	ls -l /lib/libc.so*
-	echo "the gcc version is:"
-	gcc -v
-	switch (`uname -m`)
-	case "ia64":
-		if (-e `which icc`) then
-			set platform=linux_ecc
-		else
-			set platform=linux
-		endif
-		breaksw
-	case "ppc":
-		set platform=ppclinux
-		breaksw
-	case "parisc":
-		set platform=hppalinux
-		breaksw
-	case "i?86":
-		set platform=linux-x86
-		if ("$?LINUX_MODE" == 1) then
-			if ("$LINUX_MODE" == "icc") then
-				switch (`icc -dumpversion`)
-					case "9.*":
-					case "[1-9][0-9]*":
-						set platform=linux_icc9
-						breaksw
-					default:
-						set platform=linux_icc
-						breaksw
-				endsw
-			endif
-		endif
-		breaksw
-	case "alpha":
-		set platform=linux-alpha
-		breaksw
-	case "ppc64":
-		set platform=linux-power
-		breaksw
-	default:
-		if (-d /usr/X11R6/lib64) then
-			set platform=linux64
-		else
-			set platform=linux
-		endif
-		if ("$?LINUX_MODE" == 1) then
-			if ("$LINUX_MODE" == "icc") then
-				set platform=${platform}_icc9
-			endif
-		endif
-		breaksw
-	endsw
-	#check do we have Motif on linux installed
-	set HAVE_MOTIF=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 )
-		if (-d $i/Xm) then
-			set HAVE_MOTIF=1
-			echo Motif found at $i/Xm
-			echo "Warning: Motif version 1.2 is recommended"
-			break
-		endif
-	end
-	#check do we have OpenGL installed
-	set HAVE_OGL=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 /usr/openwin/include )
-		if (-d $i/GL) then
-			set HAVE_OGL=1
-			echo OpenGL found at $i/GL
-			break
-		endif
-	end
-	breaksw
-case FreeBSD:
-	set platform=freebsd
-	set HAVE_MOTIF=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 /usr/local/include )
-		if (-d $i/Xm) then
-			set HAVE_MOTIF=1
-			echo Motif found at $i/Xm
-			break
-		endif
-	end
-	breaksw
-case Darwin:
-	set platform=darwin
-	if ("$?DARWIN_MODE" == 1) then
-		if ("$DARWIN_MODE" == "universal") then
-			set platform=darwin-univ
-		endif
-	endif
-	set HAVE_MOTIF=0
-	set HAVE_MAC=1
-	breaksw
-case NetBSD:
-	set platform=netbsd
-	set HAVE_MOTIF=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 )
-		if (-d $i/Xm) then
-			set HAVE_MOTIF=1
-			echo Motif found at $i/Xm
-			break
-		endif
-	end
-	breaksw
-case AIX:
-	set arch=`uname -M`
-	set platform=ibm_auto
-	if ("$?AIX_MODE" == 1) then
-		if ("$AIX_MODE" == "64") then
-			echo "64-bit mode build was selected for AIX"
-			set platform=ibm_auto64
-		endif
-	endif
-	echo "AIX machine is $arch"
-	set HAVE_MOTIF=0
-	foreach i (/usr/X11R6/include /usr/X11R6/include/X11 /usr/include \
-		/usr/include/X11 )
-		if (-d $i/Xm) then
-			set HAVE_MOTIF=1
-			echo Motif found at $i/Xm
-			break
-		endif
-	end
-	breaksw
-case HP-UX:
-	switch (`uname -m`)
-	case "ia64":
-		set platform=hpux_ia64
-		breaksw
-	case "9000/800":
-		set platform=hpux
-		breaksw
-	default:
-		set platform=hpux
-		breaksw
-	endsw
-	breaksw
-case QNX:
-    #uname -a: QNX qnxrulez 6.1.0 2001/06/25-15:31:48edt x86pc x86
-	set platform=qnx
-	breaksw
-default:
-	echo Platform not found : `uname -a`
-	goto BADPLATFORM
-	breaksw
-endsw
-
+set platform=linux64
 echo platform is $platform
 uname -a
 
-set NCBI_DOT_MK = ncbi/platform/${platform}.ncbi.mk
+set NCBI_DOT_MK = ../platform/${platform}.ncbi.mk
 
 if (! -r "$NCBI_DOT_MK") then
   goto BADPLATFORM
@@ -323,7 +76,6 @@ else
     echo "Enabling assert()."
 endif
 
-cd ncbi/build
 ln -s ../make/*.unx .
 ln -s ../make/ln-if-absent .
 mv makeall.unx makefile
@@ -342,8 +94,8 @@ endif
 #
 
 #uncomment two following lines to don't build X11 apps
-#set HAVE_OGL=0
-#set HAVE_MOTIF=0
+set HAVE_OGL=0
+set HAVE_MOTIF=0
 
 # if $OPENGL_TARGETS (in <platform>.ncbi.mk) is defined, 
 # then add the appropriate flags, libraries, and binaries for OpenGL apps
@@ -428,7 +180,7 @@ else # no Motif, build only ascii-based applications
 	set NET_VIB=(VIB=\"blastcl3 taxblast idfetch bl2seq asn2gb tbl2asn gene2xml $NONVIBWWWBLAST \") 
 endif
 
-set CMD='make $MFLG \
+set CMD='make -j`nproc` $MFLG \
    CFLAGS1=\"$NCBI_OPTFLAG $NCBI_CFLAGS1 $OGL_INCLUDE $PNG_INCLUDE\" \
    LDFLAGS1=\"$NCBI_LDFLAGS1\" OTHERLIBS=\"$NCBI_OTHERLIBS\" \
    SHELL=\"$NCBI_MAKE_SHELL\" LCL=\"$NCBI_DEFAULT_LCL\" \

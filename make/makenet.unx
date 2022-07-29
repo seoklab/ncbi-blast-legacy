@@ -980,38 +980,38 @@ rasn2ff :	asn2ff.c
 
 # aceread_tst program (aceread_tst)
 aceread_tst :	aceread_tst.c
-	$(CC) -g -o aceread_tst $(LDFLAGS) aceread_tst.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o aceread_tst $(LDFLAGS) aceread_tst.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asn2gb program (asn2gb)
 asn2gb :	asn2gb.c
-	$(CC) -g -o asn2gb $(LDFLAGS) asn2gb.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o asn2gb $(LDFLAGS) asn2gb.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # asn2gb_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 asn2gb_psf :	asn2gb.c
-	$(CC) -DINTERNAL_NCBI_ASN2GB -g -o asn2gb_psf $(LDFLAGS) asn2gb.c \
+	$(CC) -DINTERNAL_NCBI_ASN2GB -o asn2gb_psf $(LDFLAGS) asn2gb.c \
 		$(LIB_PS) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(NCBI_SYBLIBS_CT) $(OTHERLIBS)
 
 # asn2fsa program (asn2fsa)
 asn2fsa :	asn2fsa.c
-	$(CC) -g -o asn2fsa $(LDFLAGS) asn2fsa.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o asn2fsa $(LDFLAGS) asn2fsa.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asn2fsa_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 asn2fsa_psf :	asn2fsa.c
-	$(CC) -DINTERNAL_NCBI_ASN2FSA -g -o asn2fsa_psf $(LDFLAGS) asn2fsa.c $(THREAD_OBJ) $(LIB_PS) \
+	$(CC) -DINTERNAL_NCBI_ASN2FSA -o asn2fsa_psf $(LDFLAGS) asn2fsa.c $(THREAD_OBJ) $(LIB_PS) \
 	$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(NCBI_SYBLIBS_CT_r) \
 	$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asn2all program (asn2all)
 asn2all :	asn2all.c
-	$(CC) -g -o asn2all $(LDFLAGS) asn2all.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o asn2all $(LDFLAGS) asn2all.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
@@ -1023,7 +1023,7 @@ tbl2asn : tbl2asn.c
 # tbl2asn_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 tbl2asn_psf : tbl2asn.c 
-	$(CC) -DINTERNAL_NCBI_TBL2ASN -g -o tbl2asn_psf $(LDFLAGS) tbl2asn.c $(THREAD_OBJ) $(LIB_PS) \
+	$(CC) -DINTERNAL_NCBI_TBL2ASN -o tbl2asn_psf $(LDFLAGS) tbl2asn.c $(THREAD_OBJ) $(LIB_PS) \
 	$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(NCBI_SYBLIBS_CT_r) \
 	$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
@@ -1034,50 +1034,50 @@ raw2delt : raw2delt.c
 
 # gene2xml program (gene2xml)
 gene2xml :	gene2xml.c
-	$(CC) -g -o gene2xml $(LDFLAGS) gene2xml.c $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
+	$(CC) -o gene2xml $(LDFLAGS) gene2xml.c $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # asnval program (asnval)
 asnval :	asnval.c
-	$(CC) -g -o asnval $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o asnval $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asnval_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 asnval_psf :	asnval.c
-	$(CC) -DINTERNAL_NCBI_ASN2VAL -g -o asnval_psf $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB_PS) \
+	$(CC) -DINTERNAL_NCBI_ASN2VAL -o asnval_psf $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB_PS) \
 	$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(NCBI_SYBLIBS_CT_r) \
 	$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asnval_dbx_psf, -- debug version -- uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 asnval_dbx_psf :	asnval.c
-	$(CC) -DINTERNAL_NCBI_ASN2VAL -g -o asnval_dbx_psf $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB_PS) \
+	$(CC) -DINTERNAL_NCBI_ASN2VAL -o asnval_dbx_psf $(LDFLAGS) asnval.c $(THREAD_OBJ) $(LIB_PS) \
 	$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(NCBI_SYBLIBS_CT_r) \
 	$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asndisc program (asndisc)
 asndisc :	asndisc.c
-	$(CC) -g -o asndisc $(LDFLAGS) asndisc.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o asndisc $(LDFLAGS) asndisc.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asndisc_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 asndisc_psf :	asndisc.c
-	$(CC) -DINTERNAL_NCBI_ASNDISC -g -o asndisc_psf $(LDFLAGS) asndisc.c $(THREAD_OBJ) $(LIB_PS) \
+	$(CC) -DINTERNAL_NCBI_ASNDISC -o asndisc_psf $(LDFLAGS) asndisc.c $(THREAD_OBJ) $(LIB_PS) \
 	$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(NCBI_SYBLIBS_CT_r) \
 	$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # asnbarval program (asnbarval)
 asnbarval :	asnbarval.c
-	$(CC) -g -o asnbarval $(LDFLAGS) asnbarval.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o asnbarval $(LDFLAGS) asnbarval.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
 # demo_aceread_tst program (demo_aceread_tst)
 demo_aceread_tst :	aceread_tst.c
-	$(CC) -g -o demo_aceread_tst $(LDFLAGS) aceread_tst.c $(THREAD_OBJ) $(LIB41) \
+	$(CC) -o demo_aceread_tst $(LDFLAGS) aceread_tst.c $(THREAD_OBJ) $(LIB41) \
 		$(NETCLILIB) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(OTHERLIBS) $(THREAD_OTHERLIBS)
 
@@ -1093,52 +1093,52 @@ asnstrip : asnstrip.c
 
 # flint program (flint)
 flint :	flint.c
-	$(CC) -g -o flint $(LDFLAGS) flint.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o flint $(LDFLAGS) flint.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # xlint program (xlint)
 xlint :	xlint.c
-	$(CC) -g -o xlint $(LDFLAGS) xlint.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o xlint $(LDFLAGS) xlint.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # diffshift program (diffshift)
 diffshift :	diffshift.c
-	$(CC) -g -o diffshift $(LDFLAGS) diffshift.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o diffshift $(LDFLAGS) diffshift.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # gbseqget program (gbseqget)
 gbseqget :	gbseqget.c
-	$(CC) -g -o gbseqget $(LDFLAGS) gbseqget.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o gbseqget $(LDFLAGS) gbseqget.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # insdseqget program (insdseqget)
 insdseqget :	insdseqget.c
-	$(CC) -g -o insdseqget $(LDFLAGS) insdseqget.c $(LIB41) $(NETCLILIB) \
+	$(CC) -o insdseqget $(LDFLAGS) insdseqget.c $(LIB41) $(NETCLILIB) \
 		$(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # nps2gps program (nps2gps)
 nps2gps :	nps2gps.c
-	$(CC) -g -o nps2gps $(LDFLAGS) nps2gps.c $(LIB23) $(LIBCOMPADJ) \
+	$(CC) -o nps2gps $(LDFLAGS) nps2gps.c $(LIB23) $(LIBCOMPADJ) \
 		$(LIB2) $(LIB1) $(OTHERLIBS)
 
 # trna2sap program (trna2sap)
 trna2sap :	trna2sap.c
-	$(CC) -g -o trna2sap $(LDFLAGS) trna2sap.c $(LIB23) $(LIBCOMPADJ) \
+	$(CC) -o trna2sap $(LDFLAGS) trna2sap.c $(LIB23) $(LIBCOMPADJ) \
 		$(LIB2) $(LIB1) $(OTHERLIBS)
 
 # trna2tbl program (trna2tbl)
 trna2tbl :	trna2tbl.c
-	$(CC) -g -o trna2tbl $(LDFLAGS) trna2tbl.c $(LIB23) $(LIBCOMPADJ) \
+	$(CC) -o trna2tbl $(LDFLAGS) trna2tbl.c $(LIB23) $(LIBCOMPADJ) \
 		$(LIB2) $(LIB1) $(OTHERLIBS)
 
 # Entrez2 service test program (testent2)
 testent2 :	testent2.c
-	$(CC) -g -o testent2 $(LDFLAGS) testent2.c $(LIB23) $(LIBCOMPADJ) \
+	$(CC) -o testent2 $(LDFLAGS) testent2.c $(LIB23) $(LIBCOMPADJ) \
 		$(LIB22) $(LIB61) $(LIB60) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # network Entrez2 application (entrez2)
 entrez2 :	entrez2.c
-	$(CC) -g -o entrez2 $(LDFLAGS) entrez2.c $(LIB41) $(LIB6) $(LIB20) \
+	$(CC) -o entrez2 $(LDFLAGS) entrez2.c $(LIB41) $(LIB6) $(LIB20) \
 		$(LIB61) $(LIB60) $(LIB22) $(LIB23) $(LIBCOMPADJ) \
 		$(LIB2) $(LIB4) $(LIB1) $(VIBLIBS) $(OTHERLIBS)
 	$(VIB_POST_LINK) entrez2
@@ -1184,7 +1184,7 @@ cleanasn : cleanasn.c
 # cleanasn_psf, uses PUBSEQBioseqFetchEnable instead of PubSeqFetchEnable
 # should be used only internally within NCBI.
 cleanasn_psf : cleanasn.c
-	$(CC) -DINTERNAL_NCBI_CLEANASN -g -o cleanasn_psf $(LDFLAGS) cleanasn.c \
+	$(CC) -DINTERNAL_NCBI_CLEANASN -o cleanasn_psf $(LDFLAGS) cleanasn.c \
 		$(LIB_PS) $(LIB41) $(LIB23) $(LIB6) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(NCBI_SYBLIBS_CT) $(OTHERLIBS)
 
@@ -1215,16 +1215,16 @@ condense :	condense.c
 # test client for the id0 network service
 
 id0test: id0test.c $(BNETCLILIB) $(BLIB13)
-	$(CC) -g -o id0test $(LDFLAGS) id0test.c $(LIB13) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
+	$(CC) -o id0test $(LDFLAGS) id0test.c $(LIB13) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 idfetch: idfetch.c $(BNETCLILIB) $(BLIB41)
-	$(CC) -g -o idfetch $(LDFLAGS) idfetch.c $(LIB41) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
+	$(CC) -o idfetch $(LDFLAGS) idfetch.c $(LIB41) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # gapped BLAST client
 # blastcl3 now has the same source code as blastall but should be compiled
 # with -DBLAST_CS_API flag
 blastcl3: blastall.c $(BNETCLILIB) $(BLIB36)
-	$(CC) -g -o blastcl3 $(LDFLAGS) -DBLAST_CS_API blastall.c \
+	$(CC) -o blastcl3 $(LDFLAGS) -DBLAST_CS_API blastall.c \
 		$(LIB61) $(LIB60) $(LIB36) $(LIB23) $(LIBCOMPADJ) \
 		$(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
@@ -1236,13 +1236,13 @@ bl2seq : bl2seq.c
 		$(OTHERLIBS)
 
 taxblast: taxblast_main.c $(BLIB41) $(BLIB40)
-	$(CC) -g -o taxblast $(LDFLAGS) taxblast_main.c \
+	$(CC) -o taxblast $(LDFLAGS) taxblast_main.c \
 		$(LIB61) $(LIB60) $(LIB36) $(LIB41) $(LIB40) $(LIB23) $(LIBCOMPADJ) \
 		$(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # test client for the suggest network service
 suggcli: suggcli.c $(BNETCLILIB) $(BLIB24)
-	$(CC) -g -o suggcli $(LDFLAGS) suggcli.c $(LIB24) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
+	$(CC) -o suggcli $(LDFLAGS) suggcli.c $(LIB24) $(NETCLILIB) $(LIB2) $(LIB1) $(OTHERLIBS)
 
 # server for the suggest network service
 suggsrv : suggsrv.c $(BSRVNETCLILIB) $(BLIB24) $(NCBI_SHLIBS).alt2
@@ -1519,7 +1519,7 @@ src_chk : src_chk.c
 	$(CC) -o src_chk $(LDFLAGS) src_chk.c $(LIB2) $(LIB1) $(OTHERLIBS) 
 
 src_chk_psf : src_chk.c 
-	$(CC) -DINTERNAL_NCBI_SRC_CHK -g -o src_chk_psf $(LDFLAGS) src_chk.c \
+	$(CC) -DINTERNAL_NCBI_SRC_CHK -o src_chk_psf $(LDFLAGS) src_chk.c \
 		$(LIB_PS) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(NCBI_SYBLIBS_CT) $(OTHERLIBS)
 
@@ -1529,7 +1529,7 @@ tbl_chk : tbl_chk.c
 	$(CC) -o tbl_chk $(LDFLAGS) tbl_chk.c $(LIB2) $(LIB1) $(OTHERLIBS) 
 
 tbl_chk_psf : tbl_chk.c 
-	$(CC) -DINTERNAL_NCBI_TBL_CHK -g -o tbl_chk_psf $(LDFLAGS) tbl_chk.c \
+	$(CC) -DINTERNAL_NCBI_TBL_CHK -o tbl_chk_psf $(LDFLAGS) tbl_chk.c \
 		$(LIB_PS) $(LIB23) $(LIBCOMPADJ) $(LIB2) $(LIB1) \
 		$(NCBI_SYBLIBS_CT) $(OTHERLIBS)
 

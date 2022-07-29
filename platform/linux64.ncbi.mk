@@ -5,9 +5,9 @@ NCBI_DEFAULT_LCL = lnx
 NCBI_MAKE_SHELL = /bin/sh
 NCBI_AR=ar
 NCBI_CC = gcc -pipe -D_GNU_SOURCE
-NCBI_CFLAGS1 = -c
-NCBI_LDFLAGS1 = -O3
-NCBI_OPTFLAG = -O3
+NCBI_CFLAGS1 = -c -fPIC
+NCBI_LDFLAGS1 = -s -DNDEBUG -O3 -mavx2 -ffast-math -fPIC
+NCBI_OPTFLAG = -O3 -mavx2 -ffast-math
 NCBI_BIN_MASTER = /home/coremake/ncbi/bin
 NCBI_BIN_COPY = /home/coremake/ncbi/bin
 NCBI_INCDIR = /home/coremake/ncbi/include
@@ -43,4 +43,3 @@ NCBI_OGLLIBS = -L/usr/X11R6/lib64 -L/usr/X11R6/lib -lGL -lGLU
 
 NCBI_LBSM_SRC = ncbi_lbsmd_stub.c
 NCBI_LBSM_OBJ = ncbi_lbsmd_stub.o
-
